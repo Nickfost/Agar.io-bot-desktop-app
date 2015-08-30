@@ -1,4 +1,4 @@
 #!/bin/bash
-npm install -g express
-npm install -g electron
+sudo npm install -g express
+sudo npm install -g electron
 electron .

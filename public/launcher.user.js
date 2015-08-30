@@ -659,7 +659,7 @@ console.log("Running Bot Launcher!");
             reviving = false;
             console.log("Done Reviving!");
         }
-        
+
         if (T()) {
             var a = fa - m / 2;
             var b = ga - r / 2;
@@ -780,7 +780,7 @@ console.log("Running Bot Launcher!");
         f.lineTo(getMapEndX(), getMapEndY());
         f.stroke();
         f.restore();
-        
+
         for (d = 0; d < v.length; d++) v[d].w(f);
         for (d = 0; d < Q.length; d++) Q[d].w(f);
         //UPDATE
@@ -1311,7 +1311,7 @@ console.log("Running Bot Launcher!");
                 dArc = [],
                 dText = [],
                 lines = [],
-                names = ["FliiFe"],
+                names = ["Dfjj"],
                 originalName = names[Math.floor(Math.random() * names.length)],
                 sessionScore = 0,
                 serverIP = "",
@@ -1938,7 +1938,7 @@ console.log("Running Bot Launcher!");
                     id: 0,
                     a: null,
                     name: null,
-                    o: null,    
+                    o: null,
                     O: null,
                     x: 0,
                     y: 0,
@@ -1970,7 +1970,7 @@ console.log("Running Bot Launcher!");
                     },
                     getUptimeTime: function() {
                         return this.Q;
-                    }, 
+                    },
                     X: function() {
                         var a;
                         for (a = 0; a < v.length; a++)

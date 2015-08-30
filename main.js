@@ -3,6 +3,7 @@ var express = require('express');
 var exapp = express();
 var fs = require('fs');
 var launcherCode = '';
+var oldUsername = '';
 var BrowserWindow = require('browser-window'); // Module to create native browser window.
 
 // Report crashes to our server.
@@ -17,6 +18,15 @@ function writeLauncher(codeToWrite) {
     });
 }
 
+function writeUsername(usr) {
+    fs.writeFile(__dirname + '/public/user', usr, function (err) {
+        if (err) {
+            return console.log(err);
+        }
+        console.log("The file was saved!");
+    });
+}
+
 function readLauncher() {
     fs = require('fs')
     fs.readFile(__dirname + '/public/launcher.user.js', 'utf8', function (err, data) {
@@ -24,6 +34,15 @@ function readLauncher() {
             return console.log(err);
         }
         launcherCode = data;
+    });
+}
+function readUsername() {
+    fs = require('fs')
+    fs.readFile(__dirname + '/public/user', 'utf8', function (err, data) {
+        if (err) {
+            return console.log(err);
+        }
+        oldUsername = data;
     });
 }
 
@@ -48,7 +67,6 @@ var ipc = require('ipc');
 // initialization and is ready to create browser windows.
 app.on('ready', function () {
     var agario = createBrowser('http://agar.io/', false, 800, 600);
-
     agario.setSkipTaskbar(true);
     agario.minimize();
     readLauncher();
@@ -57,10 +75,12 @@ app.on('ready', function () {
 
     ipc.on('showagario', function (event, arg) {
         console.log('Showing agario'); // prints "ping"
-        writeLauncher(launcherCode.replace('names = ["NotReallyABot"],', 'names = ["' + arg + '"],'));
+        //readUsername(); ///^(?=.*?\bnames\b)(?=.*?\[").*$/
+        writeLauncher(launcherCode.replace(/names\ \=\ \["*"\]/, 'names = ["' + arg + '"]'));
+        //writeUsername(arg);
         agario.restore();
         agario.setSkipTaskbar(false);
-        setTimeout(function() {
+        setTimeout(function () {
             loadBot(agario);
         }, 1000);
         local.close();

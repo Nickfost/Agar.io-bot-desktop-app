@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Agar.io</title>
+    <script>
+        var ipc = require('ipc');
+    </script>
+  </head>
+  <body>
+    <h1>Game Configuration!</h1>
+    Your Username : <input type="text" id="username" />
+    <button id="start" onclick="javascript:ipc.send('showagario', document.getElementById('username').value)">Start the game !</button>
+  </body>
+</html>

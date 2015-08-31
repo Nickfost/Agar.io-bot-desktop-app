@@ -1,5 +1,14 @@
 {
-  "name"    : "agario-bot",
-  "version" : "0.1.0",
-  "main"    : "main.js"
+    "name": "agario-bot",
+    "version": "0.1.0",
+    "main": "main.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/FliiFe/Agar.io-bot-desktop-app.git"
+    },
+    "dependencies": {
+        "express": "",
+        "electron": ""
+    },
+    "license": "Apache-2.0"
 }

@@ -27,9 +27,12 @@ This is if you want to contribute or if you like to understand anything.
 * On Windows, Linux, and Mac OSX:
     + Install `nodejs`
     + Then, in a comand prompt, run :
-            npm install -g express
-            npm install -g electron
-            electron path_to_app_directory
+
+            `npm install -g express`
+
+            `npm install -g electron`
+
+            `electron path_to_app_directory`
 
 ### Troubleshooting
 

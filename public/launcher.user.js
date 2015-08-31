@@ -1,17 +1,13 @@
 /*The MIT License (MIT)
-
 Copyright (c) 2015 Apostolique
-
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
-
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
-
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -24,12 +20,12 @@ SOFTWARE.*/
 // @name        AposLauncher
 // @namespace   AposLauncher
 // @include     http://agar.io/*
-// @version     4.11
+// @version     4.123
 // @grant       none
 // @author      http://www.twitch.tv/apostolique
 // ==/UserScript==
 
-var aposLauncherVersion = 4.11;
+var aposLauncherVersion = 4.123;
 
 Number.prototype.mod = function(n) {
     return ((this % n) + n) % n;
@@ -659,7 +655,7 @@ console.log("Running Bot Launcher!");
             reviving = false;
             console.log("Done Reviving!");
         }
-
+        
         if (T()) {
             var a = fa - m / 2;
             var b = ga - r / 2;
@@ -766,7 +762,7 @@ console.log("Running Bot Launcher!");
         f.save();
         f.beginPath();
         f.lineWidth = 5;
-        f.strokeStyle = "#FFFFFF";
+        f.strokeStyle = (getDarkBool() ? '#F2FBFF' : '#111111');
         f.moveTo(getMapStartX(), getMapStartY());
         f.lineTo(getMapStartX(), getMapEndY());
         f.stroke();
@@ -780,7 +776,7 @@ console.log("Running Bot Launcher!");
         f.lineTo(getMapEndX(), getMapEndY());
         f.stroke();
         f.restore();
-
+        
         for (d = 0; d < v.length; d++) v[d].w(f);
         for (d = 0; d < Q.length; d++) Q[d].w(f);
         //UPDATE
@@ -860,7 +856,7 @@ console.log("Running Bot Launcher!");
             } else if (lines[i][4] == 6) {
                 d.strokeStyle = "#008080";
             } else if (lines[i][4] == 7) {
-                d.strokeStyle = "#FFFFFF";
+                d.strokeStyle = (getDarkBool() ? '#F2FBFF' : '#111111');
             } else {
                 d.strokeStyle = "#000000";
             }
@@ -888,7 +884,7 @@ console.log("Running Bot Launcher!");
             } else if (circles[i][3] == 6) {
                 d.strokeStyle = "#008080";
             } else if (circles[i][3] == 7) {
-                d.strokeStyle = "#FFFFFF";
+                d.strokeStyle = (getDarkBool() ? '#F2FBFF' : '#111111');
             } else {
                 d.strokeStyle = "#000000";
             }
@@ -920,7 +916,7 @@ console.log("Running Bot Launcher!");
             } else if (dArc[i][7] == 6) {
                 d.strokeStyle = "#008080";
             } else if (dArc[i][7] == 7) {
-                d.strokeStyle = "#FFFFFF";
+                d.strokeStyle = (getDarkBool() ? '#F2FBFF' : '#111111');
             } else {
                 d.strokeStyle = "#000000";
             }
@@ -966,7 +962,7 @@ console.log("Running Bot Launcher!");
                 d.strokeStyle = '#003300';
                 d.stroke();
             } else {
-                var text = new va(18, (getDarkBool() ? '#F2FBFF' : '#111111'), true, '#000000');
+                var text = new va(18, (getDarkBool() ? '#F2FBFF' : '#111111'), true, (getDarkBool() ? '#111111' : '#F2FBFF'));
 
                 text.C(dText[i]);
                 var textRender = text.L();
@@ -1311,7 +1307,7 @@ console.log("Running Bot Launcher!");
                 dArc = [],
                 dText = [],
                 lines = [],
-                names = ["Dfjj"],
+names = [""],
                 originalName = names[Math.floor(Math.random() * names.length)],
                 sessionScore = 0,
                 serverIP = "",
@@ -1896,6 +1892,9 @@ console.log("Running Bot Launcher!");
 
                     for (var i = 0; i < window.botList.length; i++) {
                         if (window.botList[i].name == "Human" && window.botList.length > 1) {
+                            if (botIndex == i) {
+                                botIndex = (botIndex + 1).mod(window.botList.length);
+                            }
                             continue;
                         }
 
@@ -1938,7 +1937,7 @@ console.log("Running Bot Launcher!");
                     id: 0,
                     a: null,
                     name: null,
-                    o: null,
+                    o: null,    
                     O: null,
                     x: 0,
                     y: 0,
@@ -1970,7 +1969,7 @@ console.log("Running Bot Launcher!");
                     },
                     getUptimeTime: function() {
                         return this.Q;
-                    },
+                    }, 
                     X: function() {
                         var a;
                         for (a = 0; a < v.length; a++)

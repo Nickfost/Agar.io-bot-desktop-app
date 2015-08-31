@@ -74,15 +74,16 @@ app.on('ready', function () {
     var local = createBrowser('http://localhost:3000/index.html', true, 800, 600);
 
     ipc.on('showagario', function (event, arg) {
-        console.log('Showing agario'); // prints "ping"
-        //readUsername(); ///^(?=.*?\bnames\b)(?=.*?\[").*$/
-        writeLauncher(launcherCode.replace(/names\ \=\ \["*"\]/, 'names = ["' + arg + '"]'));
+        console.log('Showing agario'); 
+        //readUsername();
+        var regex = /^(?=.*?names\ \=\ \[).*$/m;
+        writeLauncher(launcherCode.replace(regex, 'names = ["' + arg + '"],'));
         //writeUsername(arg);
         agario.restore();
         agario.setSkipTaskbar(false);
         setTimeout(function () {
             loadBot(agario);
-        }, 1000);
+        }, 500);
         local.close();
     });
 

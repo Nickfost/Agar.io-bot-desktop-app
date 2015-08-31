@@ -4,6 +4,7 @@ var exapp = express();
 var fs = require('fs');
 var launcherCode = '';
 var oldUsername = '';
+var regex = /^(?=.*?names\ \=\ \[).*$/m;
 var BrowserWindow = require('browser-window'); // Module to create native browser window.
 
 // Report crashes to our server.
@@ -36,6 +37,7 @@ function readLauncher() {
         launcherCode = data;
     });
 }
+
 function readUsername() {
     fs = require('fs')
     fs.readFile(__dirname + '/public/user', 'utf8', function (err, data) {
@@ -72,18 +74,22 @@ app.on('ready', function () {
     readLauncher();
 
     var local = createBrowser('http://localhost:3000/index.html', true, 800, 600);
+    readUsername();
+    ipc.on('oldUsername', function (event, arg) {
+        event.returnValue = oldUsername;
+    });
 
     ipc.on('showagario', function (event, arg) {
-        console.log('Showing agario'); 
+        console.log('Showing agario');
         //readUsername();
-        var regex = /^(?=.*?names\ \=\ \[).*$/m;
+
         writeLauncher(launcherCode.replace(regex, 'names = ["' + arg + '"],'));
-        //writeUsername(arg);
+        writeUsername(arg);
         agario.restore();
         agario.setSkipTaskbar(false);
         setTimeout(function () {
             loadBot(agario);
-        }, 500);
+        }, 1000);
         local.close();
     });
 

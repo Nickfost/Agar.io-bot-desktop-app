@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title>Agar.io</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="join-newsletter block">
+            <h2 class="titular">GAME CONFIGURATION</h2>
+            <div class="input-container">
+                <input type="text" value="NotReallyABot" class="email text-input" id="username">
+
+            </div>
+            <a class="subscribe button" href="javascript:ipc.send('showagario', document.getElementById('username').value)">LAUNCH GAME !</a>
+        </div>
+    </div>
     <script>
         var ipc = require('ipc');
+
+        document.getElementById('username').value = ipc.sendSync('oldUsername', ' ');
+
     </script>
-  </head>
-  <body>
-    <h1>Game Configuration!</h1>
-    Your Username : <input type="text" id="username" />
-    <button id="start" onclick="javascript:ipc.send('showagario', document.getElementById('username').value)">Start the game !</button>
-  </body>
+</body>
+
 </html>

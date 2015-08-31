@@ -3,6 +3,7 @@ var express = require('express');
 var exapp = express();
 var fs = require('fs');
 var launcherCode = '';
+var path_to_public = __dirname + '/public/'
 var oldUsername = '';
 var regex = /^(?=.*?names\ \=\ \[).*$/m;
 var BrowserWindow = require('browser-window'); // Module to create native browser window.
@@ -51,9 +52,15 @@ function readUsername() {
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is GCed.
 
-exapp.use(express.static('public'));
+exapp.use(express.static(__dirname + '/public'));
 
-exapp.listen(3000);
+exapp.listen(3000, function(err) {
+    if(err){
+        console.log(err);
+        return;
+    }
+    console.log(new Date() + ': Server started on port 3000');
+});
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {

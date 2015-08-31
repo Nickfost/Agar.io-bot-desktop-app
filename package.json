@@ -1,5 +1,6 @@
 {
     "name": "agario-bot",
+    "description": "Desktop app to run AposBot",
     "version": "0.1.0",
     "main": "main.js",
     "repository": {

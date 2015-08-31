@@ -1,4 +1,7 @@
 @echo off
-npm install -g express
-npm install -g electron
+echo Installing express...
+call npm install -g express
+echo Installing electron...
+call npm install -g electron
+echo Starting app...
 electron .

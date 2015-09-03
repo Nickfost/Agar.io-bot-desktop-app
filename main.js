@@ -3,6 +3,7 @@ var express = require('express');
 var exapp = express();
 var fs = require('fs');
 var launcherCode = '';
+var path = require('path');
 var path_to_public = __dirname + '/public/'
 var oldUsername = '';
 var regex = /^(?=.*?names\ \=\ \[).*$/m;
@@ -54,8 +55,8 @@ function readUsername() {
 
 exapp.use(express.static(__dirname + '/public'));
 
-exapp.listen(3000, function(err) {
-    if(err){
+exapp.listen(3000, function (err) {
+    if (err) {
         console.log(err);
         return;
     }
@@ -78,24 +79,32 @@ app.on('ready', function () {
     var agario = createBrowser('http://agar.io/', false, 800, 600);
     agario.setSkipTaskbar(true);
     agario.minimize();
+    agario.setMenuBarVisibility(false);
     readLauncher();
 
-    var local = createBrowser('http://localhost:3000/index.html', true, 800, 600);
+    var local = createBrowser('http://localhost:3000/dist/index.html', true, 800, 600);
     readUsername();
+    local.setMenuBarVisibility(false)
     ipc.on('oldUsername', function (event, arg) {
         event.returnValue = oldUsername;
     });
 
+
     ipc.on('showagario', function (event, arg) {
+
         console.log('Showing agario');
         //readUsername();
 
-        writeLauncher(launcherCode.replace(regex, 'names = ["' + arg + '"],'));
-        writeUsername(arg);
+        writeLauncher(launcherCode.replace(regex, '                names = ["' + arg[0] + '"],'));
+        writeUsername(arg[0]);
         agario.restore();
         agario.setSkipTaskbar(false);
         setTimeout(function () {
-            loadBot(agario);
+            if (arg[1] === true) {
+                loadBot(agario);
+            }else{
+                loadNoBot(agario);
+            }
         }, 1000);
         local.close();
     });
@@ -103,6 +112,11 @@ app.on('ready', function () {
     function loadBot(win) {
         win.webContents.executeJavaScript("var head=document.getElementsByTagName('head')[0],script=document.createElement('script');script.type='text/javascript',script.src='http://localhost:3000/launcher.user.js',head.appendChild(script);")
         win.webContents.executeJavaScript("var head=document.getElementsByTagName('head')[0],script=document.createElement('script');script.type='text/javascript',script.src='http://localhost:3000/bot.user.js',head.appendChild(script);")
+    }
+    function loadNoBot(win) {
+        //TODO: Launch game but not bot here. Find right scripts.
+        //win.webContents.executeJavaScript("");
+        //win.webContents.executeJavaScript("");
     }
 
     function createBrowser(url, nodeIntegration, w, h) {

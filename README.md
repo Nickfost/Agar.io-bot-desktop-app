@@ -1,7 +1,7 @@
 ### Description
 
 
-This is an app built on `electron`, which uses web technologies on top of `nodejs`.
+This is an app built on `electron`, which uses web technologies on top of `nodejs`. It runs @Apostolique Agar.io bot.
 
 ### Installation
 
@@ -28,18 +28,26 @@ This is if you want to contribute or if you like to understand anything.
     + Install `nodejs`
     + Then, in a comand prompt, run :
 
-            npm install -g express
+            npm install express
             npm install -g electron
             electron path_to_app_directory
+
+### Thanks
+
+* Thanks to **Apostolique** for the bot creation and for testing on windows.
+* Thanks to **Designmodo** for the open-source `Flat-UI` CSS/JS theme.
 
 ### Troubleshooting
 
 If you are having issues, please refer to this section before posting an issue
 
-* **'electron' is not recognised as internal command'**
-    + Please check that `electron` is in your %PATH% variable.
+* **'_electron_' was not recognized as internal command'**
     + Download `electron` from the [official repository](https://github.com/atom/electron/releases).
 
     **_Make sure to select the right version!_** (`electron-v*-win32-ia32.zip` or `electron-v*-win64-x64.zip`)
 
     Then extract it somewhere, and add the path to your %PATH% environment variable.
+* **Error: _Cannot find module 'express'_**
+    + In a terminal/command prompt, go to the app directory, then run `npm install`.
+
+    If this does not fix it, run `npm install express`

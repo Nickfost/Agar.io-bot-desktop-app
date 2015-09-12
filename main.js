@@ -100,7 +100,7 @@ app.on('ready', function () {
             if (arg[1] === true) {
                 loadBot(agario);
             }else{
-                loadNoBot(agario);
+                loadNoBot(agario, arg[0]);
             }
         }, 1000);
         local.close();
@@ -110,10 +110,10 @@ app.on('ready', function () {
         win.webContents.executeJavaScript("var head=document.getElementsByTagName('head')[0],script=document.createElement('script');script.type='text/javascript',script.src='http://localhost:3000/launcher.user.js',head.appendChild(script);")
         win.webContents.executeJavaScript("var head=document.getElementsByTagName('head')[0],script=document.createElement('script');script.type='text/javascript',script.src='http://localhost:3000/bot.user.js',head.appendChild(script);")
     }
-    function loadNoBot(win) {
+    function loadNoBot(win, username) {
         //TODO: Launch game but not bot here. Find right scripts.
-        //win.webContents.executeJavaScript("");
-        //win.webContents.executeJavaScript("");
+        win.webContents.executeJavaScript("document.getElementById('nick').value = '" + username + "'");
+        win.webContents.executeJavaScript("setTimeout(setNick(document.getElementById('nick').value),750);");
     }
 
     function createBrowser(url, nodeIntegration, w, h) {

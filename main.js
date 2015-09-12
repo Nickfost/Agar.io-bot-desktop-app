@@ -9,9 +9,6 @@ var oldUsername = '';
 var regex = /^(?=.*?names\ \=\ \[).*$/m;
 var BrowserWindow = require('browser-window'); // Module to create native browser window.
 
-// Report crashes to our server.
-require('crash-reporter').start();
-
 function writeLauncher(codeToWrite) {
     fs.writeFile(__dirname + '/public/launcher.user.js', codeToWrite, function (err) {
         if (err) {

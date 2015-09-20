@@ -10,7 +10,7 @@ var regex = /^(?=.*?names\ \=\ \[).*$/m;
 var BrowserWindow = require('browser-window'); // Module to create native browser window.
 
 function writeLauncher(codeToWrite) {
-    fs.writeFile(__dirname + '/public/launcher.user.js', codeToWrite, function (err) {
+    fs.writeFile(__dirname + '/public/AposLauncher.user.js', codeToWrite, function (err) {
         if (err) {
             return console.log(err);
         }
@@ -29,7 +29,7 @@ function writeUsername(usr) {
 
 function readLauncher() {
     fs = require('fs')
-    fs.readFile(__dirname + '/public/launcher.user.js', 'utf8', function (err, data) {
+    fs.readFile(__dirname + '/public/AposLauncher.user.js', 'utf8', function (err, data) {
         if (err) {
             return console.log(err);
         }
@@ -107,8 +107,11 @@ app.on('ready', function () {
     });
 
     function loadBot(win) {
-        win.webContents.executeJavaScript("var head=document.getElementsByTagName('head')[0],script=document.createElement('script');script.type='text/javascript',script.src='http://localhost:3000/launcher.user.js',head.appendChild(script);")
-        win.webContents.executeJavaScript("var head=document.getElementsByTagName('head')[0],script=document.createElement('script');script.type='text/javascript',script.src='http://localhost:3000/bot.user.js',head.appendChild(script);")
+		win.webContents.executeJavaScript("var head=document.getElementsByTagName('head')[0],script=document.createElement('script');script.type='text/javascript',script.src='http://localhost:3000/parse-1.5.0.min.js',head.appendChild(script);")
+		win.webContents.executeJavaScript("var head=document.getElementsByTagName('head')[0],script=document.createElement('script');script.type='text/javascript',script.src='http://localhost:3000/AposFeedingBot.user.js',head.appendChild(script);")
+        win.webContents.executeJavaScript("var head=document.getElementsByTagName('head')[0],script=document.createElement('script');script.type='text/javascript',script.src='http://localhost:3000/AposBot.user.js',head.appendChild(script);")
+		win.webContents.executeJavaScript("var head=document.getElementsByTagName('head')[0],script=document.createElement('script');script.type='text/javascript',script.src='http://localhost:3000/AposLauncher.user.js',head.appendChild(script);")
+
     }
     function loadNoBot(win, username) {
         //TODO: Launch game but not bot here. Find right scripts.
